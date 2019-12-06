@@ -1,2 +1,2 @@
 # emberclear-democracy-prototype
-## Discord Bot
+### Discord Bot
