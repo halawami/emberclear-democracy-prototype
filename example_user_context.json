@@ -1,0 +1,22 @@
+[
+  {
+    "user": "discord_uid",
+    "user_context": {
+      "admin": "discord_uid",
+      "members": [
+        "discord_uid1",
+        "discord_uid2"
+      ]
+    }
+  },
+  {
+    "user": "discord_uid",
+    "user_context": {
+      "admin": "discord_uid",
+      "members": [
+        "discord_uid1",
+        "discord_uid2"
+      ]
+    }
+  }
+]
