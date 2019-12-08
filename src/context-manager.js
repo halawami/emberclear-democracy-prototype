@@ -50,8 +50,7 @@ let ContextManager = {
 
 	change_admin: function(channel_uid, user_uid){
 		var channelContext = contexts.find((context) => context.channel === channel_uid)
-		if(channelContext !== undefined){
-			// ADD CHECK TO SEE IF user_uid IS ACTUALLY IN THE CHANNEL
+		if(channelContext !== undefined && determine_if_user_is_in_channel(channel_uid, user_uid)){
 			channelContext.user_contexts.forEach((userContext) => userContext.user_context.admin = user_uid)
 		}
 	},
@@ -64,6 +63,23 @@ let ContextManager = {
 				userContext.user_context = user_context
 			}
 		}
+	},
+
+	determine_if_user_is_in_channel: function(channel_uid, user_uid){
+		var countFor = 0
+		var countAgainst = 0
+		var channelContext = contexts.find((context) => context.channel === channel_uid)
+		if(channelContext !== undefined){
+			channelContext.user_contexts.forEach((userContext) => {
+				if(userContext.members.indexOf(user_uid) !== -1){
+					countFor++
+				}
+				else{
+					countAgainst++
+				}
+			})
+		}
+		return countFor > countAgainst
 	}
 }
 
