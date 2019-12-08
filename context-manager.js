@@ -1,12 +1,10 @@
 let ContextManager = {
 
-	constructor(){
-		this.contexts = []
-	}
+	contexts: [],
 
 	add_channel: function(channel_uid, user_uid){
-		if(this.contexts.every((context) => context.channel !== channel_uid)){
-			this.contexts.push({
+		if(contexts.every((context) => context.channel !== channel_uid)){
+			contexts.push({
 				"channel": channel_uid,
 				"user_contexts": [{
 					"user": user_uid,
@@ -19,10 +17,10 @@ let ContextManager = {
 				}]
 			})
 		}	
-	}
+	},
 
 	add_user: function(channel_uid, user_uid){
-		var channelContext = this.contexts.find((context) => context.channel === channel_uid)
+		var channelContext = contexts.find((context) => context.channel === channel_uid)
 		if(channelContext !== undefined && channelContext.user_contexts.every((userContext) => userContext.user !== user_uid)){
 			channelContext.user_contexts.push({
 				"user": user_uid,
@@ -32,10 +30,10 @@ let ContextManager = {
 				}
 			})
 		}
-	}
+	},
 
 	delete_user: function(channel_uid, user_uid){
-		var channelContext = this.contexts.find((context) => context.channel === channel_uid)
+		var channelContext = contexts.find((context) => context.channel === channel_uid)
 		if(channelContext !== undefined){
 			var index = channelContext.user_contexts.findIndex((userContext) => userContext.user === user_uid)
 			if(index !== -1){
@@ -48,10 +46,10 @@ let ContextManager = {
 				})
 			}
 		}
-	}
+	},
 
 	change_admin: function(channel_uid, user_uid){
-		var channelContext = this.contexts.find((context) => context.channel === channel_uid)
+		var channelContext = contexts.find((context) => context.channel === channel_uid)
 		if(channelContext !== undefined){
 			// ADD CHECK TO SEE IF user_uid IS ACTUALLY IN THE CHANNEL
 			channelContext.user_contexts.forEach((userContext) => userContext.user_context.admin = user_uid)
