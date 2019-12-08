@@ -54,6 +54,16 @@ let ContextManager = {
 			// ADD CHECK TO SEE IF user_uid IS ACTUALLY IN THE CHANNEL
 			channelContext.user_contexts.forEach((userContext) => userContext.user_context.admin = user_uid)
 		}
+	},
+
+	change_users_user_context: function(channel_uid, user_uid, user_context){
+		var channelContext = contexts.find((context) => context.channel === channel_uid)
+		if(channelContext !== undefined){
+			var userContext = channelContext.user_contexts.find((currentUserContext) => currentUserContext.user === user_uid)
+			if(userContext !== undefined){
+				userContext.user_context = user_context
+			}
+		}
 	}
 }
 
