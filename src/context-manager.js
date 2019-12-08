@@ -60,7 +60,7 @@ let ContextManager = {
 		var channelContext = contexts.find((context) => context.channel === channel_uid)
 		if(channelContext !== undefined){
 			var userContext = channelContext.user_contexts.find((currentUserContext) => currentUserContext.user === user_uid)
-			if(userContext !== undefined){
+			if(userContext !== undefined && user_context.admin !== undefined && Array.isArray(user_context.members)){
 				userContext.user_context = user_context
 			}
 		}
