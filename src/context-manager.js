@@ -101,9 +101,21 @@ let ContextManager = {
 					})
 				}
 
-				
+				userContext.user_context.members.forEach((member) => {
+					var memberVotes = decidedUponContext.members.find((memberVote) => member.name === member)
+					if(memberVotes !== undefined){
+						memberVotes.count++
+					}
+					else{
+						decidedUponContext.members.push({
+							"name": member,
+							"count": 1
+						})
+					}
+				})
 			})
 		}
+		//TODO compile votes to determine context
 	}
 }
 
