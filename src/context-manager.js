@@ -114,8 +114,35 @@ let ContextManager = {
 					}
 				})
 			})
+
+			var totalVotes = channelContext.user_contexts.length
+
+			var adminHighestVote = {
+				"name": undefined,
+				"count": 0
+			}
+			var finalAdmin = undefined
+			decidedUponContext.admin.forEach((admin) => {
+				if(admin.count > adminHighestVote.count){
+					adminHighestVote = admin
+				}
+			})
+			if(adminHighestVote.count > totalVotes / 2){
+				finalAdmin = adminHighestVote.name
+			}
+
+			var finalMembers = []
+			decidedUponContext.members.forEach((member) => {
+				if(member.count > totalVotes/2){
+					finalMembers.push(member.name)
+				}
+			})
+
+			return {
+				"admin": finalAdmin,
+				"members": finalMembers
+			}
 		}
-		//TODO compile votes to determine context
 	}
 }
 
