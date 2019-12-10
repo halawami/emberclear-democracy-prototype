@@ -80,6 +80,30 @@ let ContextManager = {
 			})
 		}
 		return countFor > countAgainst
+	},
+
+	determine_channel_context: function(channel_uid){
+		var channelContext = contexts.find((context) => context.channel === channel_uid)
+		var decidedUponContext = {
+			"admin": []
+			"members": []
+		}
+		if(channelContext !== undefined){
+			channelContext.user_contexts.forEach((userContext) => {
+				var adminVotes = decidedUponContext.admin.find((admin) => admin.name === userContext.user_context.admin)
+				if(adminVotes !== undefined){
+					adminVotes.count++
+				}
+				else{
+					decidedUponContext.admin.push({
+						"name": userContext.user_context.admin,
+						"count": 1
+					})
+				}
+
+				
+			})
+		}
 	}
 }
 
