@@ -22,7 +22,11 @@ let ContextManager = {
 	add_user: function(channel_uid, user_uid){
 		var channelContext = contexts.find((context) => context.channel === channel_uid)
 		if(channelContext !== undefined && channelContext.user_contexts.every((userContext) => userContext.user !== user_uid)){
-			channelContext.user_contexts.forEach((userContext) => userContext.user_context.members.push(user_uid))
+			channelContext.user_contexts.forEach((userContext) => {
+				if(userContext.user_context.members.find(user_uid) === undefined){
+					userContext.user_context.members.push(user_uid)
+				}				
+			})
 			channelContext.user_contexts.push({
 				"user": user_uid,
 				"user_context": determine_channel_context()
